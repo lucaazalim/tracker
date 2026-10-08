@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tracker: background location logging for iPhone</title>
-  <meta name="description" content="Tracker records your iPhone's location in the background and uploads it in batches to an HTTP endpoint you control. Open source, no accounts, no analytics.">
+  <meta name="description" content="A free, open-source iOS app that records your location in the background and uploads it in batches to an HTTP endpoint you choose.">
   <meta name="theme-color" content="#f6f6f3" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0f0e" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Tracker: your location history, on your own server">
-  <meta property="og:description" content="Background location logging for iPhone that uploads to an HTTP endpoint you control. Every Core Location setting is yours to tune.">
+  <meta property="og:title" content="Tracker: background location logging for iPhone">
+  <meta property="og:description" content="A free, open-source iOS app that records your location in the background and uploads it in batches to an HTTP endpoint you choose.">
   <meta property="og:image" content="https://lucaazalim.github.io/tracker/assets/icon-256.png">
   <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/png" href="assets/favicon-64.png">
@@ -168,8 +168,7 @@
       margin-bottom: 28px;
     }
     .tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-    .hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); letter-spacing: -0.045em; line-height: 1.02; max-width: 12ch; }
-    .hero h1 em { font-style: normal; color: var(--accent-ink); }
+    .hero h1 { font-size: clamp(2.4rem, 4.8vw, 4rem); letter-spacing: -0.04em; line-height: 1.04; max-width: 13ch; }
     .lede { margin-top: 24px; font-size: clamp(1.05rem, 1.6vw, 1.22rem); line-height: 1.55; color: var(--ink-2); max-width: 34em; }
     .hero .actions { margin-top: 36px; }
     .meta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px; color: var(--muted); }
@@ -227,7 +226,6 @@
 
     /* Sections */
     section { padding: 112px 0; }
-    .eyebrow { font: 500 13px/1 var(--mono); color: var(--accent-ink); letter-spacing: .02em; margin-bottom: 18px; display: block; }
     .h2 { font-size: clamp(2rem, 3.8vw, 3.1rem); letter-spacing: -0.04em; max-width: 18ch; }
     .sub { margin-top: 18px; color: var(--muted); font-size: 18px; max-width: 36em; }
     .head { margin-bottom: 56px; }
@@ -320,7 +318,7 @@
     .callout code { font-size: 13.5px; }
 
     /* Privacy band */
-    .band { background: #06201d; color: #e6efec; padding: 128px 0; position: relative; overflow: hidden; }
+    .band { background: #06201d; color: #e6efec; padding: 112px 0; position: relative; overflow: hidden; }
     .band::before {
       content: ""; position: absolute; inset: 0;
       background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .08) 1px, transparent 0);
@@ -329,10 +327,9 @@
       mask-image: linear-gradient(180deg, transparent, #000 40%, #000 60%, transparent);
     }
     .band .wrap { position: relative; }
-    .band .eyebrow { color: #2cd9a8; }
-    .band h2 { font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: -0.045em; max-width: 16ch; }
-    .band h2 span { color: rgba(230, 239, 236, .45); }
-    .band .cols { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .band h2 { font-size: clamp(2rem, 3.8vw, 3.1rem); letter-spacing: -0.04em; }
+    .band-lede { margin-top: 18px; font-size: 18px; color: rgba(230, 239, 236, .72); max-width: 36em; }
+    .band .cols { margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
     .band .cols div { border-top: 1px solid rgba(255, 255, 255, .14); padding-top: 22px; }
     .band .cols h3 { font-size: 18px; letter-spacing: -0.02em; margin-bottom: 8px; }
     .band .cols p { font-size: 15px; color: rgba(230, 239, 236, .62); }
@@ -418,9 +415,9 @@
     <section class="hero">
       <div class="wrap">
         <div>
-          <span class="tag"><i></i>For iPhone and iPad · iOS 26</span>
-          <h1>Your location history, on <em>your</em> server.</h1>
-          <p class="lede">Tracker records your location in the background and uploads it in batches to an HTTP endpoint you control. Every Core Location setting is yours to tune, and your data goes nowhere else.</p>
+          <span class="tag"><i></i>Free · iPhone and iPad · iOS 26</span>
+          <h1>Background location logging to your own server.</h1>
+          <p class="lede">Tracker records your location in the background, queues it on the device, and uploads it in batches to an HTTP endpoint you choose. It's a rewrite of Overland, and its GeoJSON output works with existing Overland receivers.</p>
           <div class="actions">
             <a class="appstore js-store" href="https://github.com/lucaazalim/tracker">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg>
@@ -432,8 +429,8 @@
             </a>
           </div>
           <div class="meta">
-            <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Open source, MIT</span>
-            <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>No accounts</span>
+            <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>MIT licensed</span>
+            <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>No account needed</span>
             <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>No analytics</span>
           </div>
         </div>
@@ -472,16 +469,15 @@
     <section class="pipeline" id="how">
       <div class="wrap">
         <div class="head">
-          <span class="eyebrow">How it works</span>
-          <h2 class="h2">From Core Location to your endpoint, with nothing in between.</h2>
-          <p class="sub">The active profile decides what's captured. A durable queue decides when it's safe to forget. Your server decides when it's been received.</p>
+          <h2 class="h2">How it works</h2>
+          <p class="sub">Locations are captured using the settings of the active profile, stored in a local SQLite queue, and uploaded in batches. A record is deleted only after the server acknowledges it.</p>
         </div>
         <ol class="steps">
-          <li><h3>Capture</h3><p>Standard updates, significant changes and visits, configured by the active profile.</p></li>
-          <li><h3>Filter</h3><p>Drop points by distance or time. Wi-Fi zones pin or skip points at home.</p></li>
+          <li><h3>Capture</h3><p>Standard updates, significant-change updates and visits, as set in the active profile.</p></li>
+          <li><h3>Filter</h3><p>Points too close in distance or time to the previous one are dropped. Wi-Fi zones can replace or skip points.</p></li>
           <li><h3>Queue</h3><p>Each record is serialized once and stored in SQLite on the device.</p></li>
-          <li><h3>Upload</h3><p>Batches go out on your interval, on demand, or during background refresh.</p></li>
-          <li><h3>Acknowledge</h3><p>Records are deleted only after your server confirms them.</p></li>
+          <li><h3>Upload</h3><p>Batches are sent on the configured interval, on request, or during background app refresh.</p></li>
+          <li><h3>Acknowledge</h3><p>Records stay queued until the server confirms them, and failed batches are retried.</p></li>
         </ol>
 
         <div class="code-grid">
@@ -536,16 +532,15 @@ Content-Type: application/json</span>
     <section id="features">
       <div class="wrap">
         <div class="head">
-          <span class="eyebrow">Features</span>
-          <h2 class="h2">Built for people who read the payload.</h2>
-          <p class="sub">Tracker is a settings app with a location engine attached. Set it up once, check the inspector when something looks off, and otherwise forget it's running.</p>
+          <h2 class="h2">Features</h2>
+          <p class="sub">The app is mostly settings. There's no map or history view: the data is meant to be used on your server.</p>
         </div>
 
         <div class="rows">
           <article class="row">
             <div class="copy">
-              <h3>Profiles instead of a single settings page.</h3>
-              <p>Keep named sets of capture, upload and payload settings, like <em>Balanced</em>, <em>High resolution</em> or <em>Battery saver</em>. Switch between them in the app, from Shortcuts, or from your server's response.</p>
+              <h3>Profiles</h3>
+              <p>A profile is a named set of capture, upload and payload settings, for example <em>Balanced</em> or <em>Battery saver</em>. You can switch profiles in the app, with Shortcuts, or from the server's response.</p>
               <ul class="facts">
                 <li><span>Updates</span><span>Standard, significant changes, or both</span></li>
                 <li><span>Accuracy</span><span>Best for navigation to 3 km</span></li>
@@ -558,8 +553,8 @@ Content-Type: application/json</span>
 
           <article class="row">
             <div class="copy">
-              <h3>Speaks your receiver's protocol.</h3>
-              <p>Send GeoJSON batches or OwnTracks objects. Authenticate with a bearer token, Basic auth or custom headers, and drop the latest coordinates straight into the URL for receivers that read query parameters.</p>
+              <h3>Server</h3>
+              <p>Records are sent as GeoJSON batches in the Overland format, or as OwnTracks objects. Authentication can be a bearer token, Basic auth or custom headers. The endpoint URL can include placeholders for receivers that take query parameters.</p>
               <ul class="facts">
                 <li><span>Formats</span><span>GeoJSON, OwnTracks</span></li>
                 <li><span>Auth</span><span>Bearer, Basic, custom headers</span></li>
@@ -572,13 +567,13 @@ Content-Type: application/json</span>
 
           <article class="row">
             <div class="copy">
-              <h3>Every request, inspectable.</h3>
-              <p>The last 200 requests are kept with their headers, bodies and responses, with credentials masked. Test the connection with an empty batch before you rely on it.</p>
+              <h3>Request log</h3>
+              <p>The app keeps the last 200 requests with their headers, bodies and responses, with credentials masked. <em>Test Connection</em> sends an empty batch, so you can check a receiver without sending any data.</p>
               <ul class="facts">
                 <li><span>History</span><span>Last 200 requests</span></li>
                 <li><span>Shows</span><span>Status, duration, size, full body</span></li>
                 <li><span>Credentials</span><span>Masked</span></li>
-                <li><span>Share</span><span>Export any exchange</span></li>
+                <li><span>Export</span><span>Share sheet</span></li>
               </ul>
             </div>
             <div class="shot"><div class="phone"><img src="screenshots/inspector.png" alt="Request inspector showing a 200 response and the request body" width="460" height="1000" loading="lazy"></div></div>
@@ -590,33 +585,32 @@ Content-Type: application/json</span>
     <section class="spec">
       <div class="wrap">
         <div class="head">
-          <span class="eyebrow">Details</span>
-          <h2 class="h2">The parts that matter when it runs for months.</h2>
+          <h2 class="h2">Also included</h2>
         </div>
         <div class="cells">
           <div class="cell">
             <h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><ellipse cx="10" cy="5" rx="6.5" ry="2.5"/><path d="M3.5 5v10c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5V5M3.5 10c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5"/></svg>Offline queue</h3>
-            <p>Records wait in SQLite until they're acknowledged. Retention limits keep an unreachable server from filling the device.</p>
+            <p>Records are kept in SQLite until they're acknowledged. Limits on count and age stop an unreachable server from filling the device.</p>
           </div>
           <div class="cell">
             <h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 4L2.5 10 7 16M13 4l4.5 6-4.5 6"/></svg>Per-field payloads</h3>
-            <p>Turn each property on or off. Every toggle shows the JSON key it controls, with a live preview of the record.</p>
+            <p>Each property can be turned on or off. Every toggle shows the JSON key it controls, and a preview shows the resulting record.</p>
           </div>
           <div class="cell">
             <h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8a11.5 11.5 0 0116 0M4.8 11a7.5 7.5 0 0110.4 0M7.6 14a3.5 3.5 0 014.8 0"/><circle cx="10" cy="16.5" r=".6" fill="currentColor"/></svg>Wi-Fi zones</h3>
-            <p>On a known network, record a fixed coordinate so there's no GPS drift at home, or record nothing at all.</p>
+            <p>While connected to a listed network, record a fixed coordinate instead of GPS, or record nothing.</p>
           </div>
           <div class="cell">
             <h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 2.5l6.5 2.5v4.5c0 4-2.8 6.9-6.5 8-3.7-1.1-6.5-4-6.5-8V5L10 2.5z"/><path d="M7 10l2 2 4-4"/></svg>Health checks</h3>
-            <p>Permission, precise location, Background App Refresh and receiver status on one screen, plus a watchdog if tracking stops.</p>
+            <p>Shows permission, precise location, Background App Refresh and receiver status. An optional notification fires if no location arrives for a while.</p>
           </div>
           <div class="cell">
             <h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5"/></svg>Shortcuts and Siri</h3>
-            <p>Start, stop, switch profile, upload now, or read the queue size. <em>When I arrive at work, switch to Battery saver.</em></p>
+            <p>Actions to start and stop tracking, switch profile, upload queued records, and get the queue size.</p>
           </div>
           <div class="cell">
             <h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="12" y="3" width="5" height="5" rx="1"/><rect x="3" y="12" width="5" height="5" rx="1"/><path d="M12 12h2v2h-2zM15 15h2v2h-2zM15 12h2M12 17h1"/></svg>Links and QR codes</h3>
-            <p>Share a configuration as JSON, a <code>tracker://</code> link or a QR code. Every import opens a review screen first.</p>
+            <p>Export a configuration as JSON, a <code>tracker://</code> link or a QR code. Imports are shown for review before they apply.</p>
           </div>
         </div>
       </div>
@@ -625,9 +619,8 @@ Content-Type: application/json</span>
     <section id="receivers">
       <div class="wrap recv">
         <div>
-          <span class="eyebrow">Receivers</span>
-          <h2 class="h2">Works with the receiver you already run.</h2>
-          <p class="sub">If it accepts Overland's GeoJSON batches or OwnTracks over HTTP, it works with Tracker. Point it at your endpoint, or set it up from a link.</p>
+          <h2 class="h2">Compatible receivers</h2>
+          <p class="sub">Any receiver that accepts Overland's GeoJSON format, or OwnTracks over HTTP, should work. You can enter the endpoint by hand or open a setup link.</p>
           <div class="code" style="margin-top: 36px;">
             <header><b>Setup link</b><span>opens a review screen</span></header>
 <pre><span class="h">tracker://setup</span><span class="c">?</span><span class="k">url</span>=<span class="s">https%3A%2F%2Fyour-server.example%2Fingest</span>
@@ -643,19 +636,19 @@ Content-Type: application/json</span>
             <li><a href="https://github.com/dontic/wayfinder"><strong>Wayfinder</strong></a><span>Self-hosted location tracking.</span></li>
             <li><strong>Your own</strong><span>Anything that accepts a JSON POST and replies <code>{"result":"ok"}</code>.</span></li>
           </ul>
-          <p class="callout"><strong>Coming from Overland?</strong> Your receiver works as it is, and <code>overland://setup</code> links open in Tracker too.</p>
+          <p class="callout"><strong>Coming from Overland:</strong> existing receivers work without changes, and <code>overland://setup</code> links are accepted.</p>
         </div>
       </div>
     </section>
 
     <section class="band">
       <div class="wrap">
-        <span class="eyebrow">Privacy</span>
-        <h2>One destination. <span>The URL you typed in.</span></h2>
+        <h2>Privacy</h2>
+        <p class="band-lede">Tracker sends data only to the endpoint you configure. Queued records and settings stay in the app's sandbox until they're uploaded or deleted.</p>
         <div class="cols">
-          <div><h3>No accounts</h3><p>There's nothing to sign up for and no service of ours in the middle.</p></div>
-          <div><h3>No analytics</h3><p>No crash reporting, no telemetry and no third-party SDKs. The app has no dependencies at all.</p></div>
-          <div><h3>Open source</h3><p>Read every line that touches your location. MIT licensed, on GitHub.</p></div>
+          <div><h3>No account</h3><p>There's nothing to sign up for, and no intermediate service.</p></div>
+          <div><h3>No analytics</h3><p>No telemetry, crash reporting or third-party dependencies.</p></div>
+          <div><h3>Open source</h3><p>The source code is on GitHub under the MIT license.</p></div>
         </div>
       </div>
     </section>
@@ -663,14 +656,14 @@ Content-Type: application/json</span>
     <section class="cta">
       <div class="wrap">
         <img src="assets/icon-256.png" alt="Tracker app icon" width="96" height="96" loading="lazy">
-        <h2>Set it up once. Forget it's there.</h2>
-        <p>Tracker for iPhone and iPad. Requires iOS 26 or later.</p>
+        <h2>Tracker</h2>
+        <p>Free for iPhone and iPad. Requires iOS 26 or later.</p>
         <div class="actions">
           <a class="appstore js-store" href="https://github.com/lucaazalim/tracker">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg>
             <span><small>Download on the</small><strong>App Store</strong></span>
           </a>
-          <a class="ghost" href="https://github.com/lucaazalim/tracker#readme">Read the docs</a>
+          <a class="ghost" href="https://github.com/lucaazalim/tracker#readme">Documentation</a>
         </div>
       </div>
     </section>
