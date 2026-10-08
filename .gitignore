@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/TrackerKit/.build/
+Packages/TrackerKit/.swiftpm/
+
+# Local signing overrides (see README)
+Config/Signing.local.xcconfig

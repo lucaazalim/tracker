@@ -1,0 +1,11 @@
+// Copy to Signing.local.xcconfig (git-ignored) and fill in your values.
+
+// Your Apple Developer team ID (Xcode → Settings → Accounts).
+DEVELOPMENT_TEAM = ABCDE12345
+
+// Must be unique to you, e.g. your reverse domain.
+TRACKER_BUNDLE_ID_PREFIX = com.yourname
+
+// Free Apple ID ("Personal Team")? It can't use the Access Wi-Fi Information capability,
+// so use the entitlements file without it. Wi-Fi names and Wi-Fi zones won't be available.
+// CODE_SIGN_ENTITLEMENTS = Config/Tracker-PersonalTeam.entitlements

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tracker Receiver</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    :root {
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --surface-2: #eef0f3;
+      --text: #15181d;
+      --muted: #69707c;
+      --border: #dfe2e7;
+      --brand: #0da688;
+      --ok: #1f9d55;
+      --warn: #c97a10;
+      --error: #d93a3a;
+      --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0e1013;
+        --surface: #171a1f;
+        --surface-2: #1f232a;
+        --text: #e9ecf0;
+        --muted: #8b93a0;
+        --border: #2a2f37;
+        --brand: #2cd9a8;
+        --ok: #3ccf7a;
+        --warn: #f0a83a;
+        --error: #ff6b6b;
+      }
+      .leaflet-tile { filter: brightness(0.75) contrast(1.1) saturate(0.8); }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px;
+      padding: 12px 16px;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    h1 { margin: 0; font-size: 16px; font-weight: 650; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+    .dot.live { background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 25%, transparent); }
+    .stats { display: flex; gap: 20px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .stats b { color: var(--text); font-weight: 600; }
+    .actions { margin-left: auto; display: flex; gap: 12px; align-items: center; color: var(--muted); }
+    button {
+      font: inherit; color: var(--text); background: var(--surface-2);
+      border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; cursor: pointer;
+    }
+    main {
+      display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px;
+      padding: 16px; max-width: 1600px; margin: 0 auto;
+    }
+    #map {
+      position: sticky; top: 76px; height: calc(100vh - 92px); min-height: 320px;
+      border-radius: 14px; border: 1px solid var(--border); background: var(--surface-2);
+    }
+    #feed { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+    .empty { color: var(--muted); text-align: center; padding: 48px 16px; border: 1px dashed var(--border); border-radius: 14px; }
+    .empty code { font-family: var(--mono); }
+    details.item {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    details.item.fresh { animation: flash 1.6s ease-out; }
+    @keyframes flash { from { border-color: var(--brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 30%, transparent); } }
+    summary {
+      list-style: none; cursor: pointer; padding: 10px 14px;
+      display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .status {
+      font: 600 12px var(--mono); padding: 2px 7px; border-radius: 6px;
+      background: color-mix(in srgb, var(--ok) 15%, transparent); color: var(--ok);
+    }
+    .status.fail { background: color-mix(in srgb, var(--error) 15%, transparent); color: var(--error); }
+    .title { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .time { color: var(--muted); font-variant-numeric: tabular-nums; }
+    .meta { grid-column: 2 / 4; color: var(--muted); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .badge { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 5px; background: var(--surface-2); color: var(--muted); margin-left: 6px; }
+    .body { border-top: 1px solid var(--border); padding: 10px 14px 14px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    th { color: var(--muted); font-weight: 500; }
+    td.mono { font-family: var(--mono); }
+    tr.event td { color: var(--warn); }
+    pre {
+      margin: 10px 0 0; padding: 10px; max-height: 320px; overflow: auto;
+      background: var(--surface-2); border-radius: 8px; font: 12px/1.5 var(--mono);
+    }
+    .label { margin-top: 12px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    @media (max-width: 860px) {
+      main { grid-template-columns: 1fr; }
+      #map { position: relative; top: 0; height: 45vh; }
+      .actions { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><span class="dot" id="connection" title="Disconnected"></span>Tracker Receiver</h1>
+    <div class="stats">
+      <span><b id="stat-requests">0</b> requests</span>
+      <span><b id="stat-records">0</b> records</span>
+      <span>last <b id="stat-last">never</b></span>
+    </div>
+    <div class="actions">
+      <label><input type="checkbox" id="follow" checked> Follow latest</label>
+      <button id="clear">Clear</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="map"></div>
+    <section id="feed">
+      <div class="empty" id="empty">
+        Waiting for data…<br>
+        Point Tracker at <code id="endpoint"></code>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const MAX_ITEMS = 200;
+    const MAX_TRACK_POINTS = 5000;
+
+    const feed = document.getElementById("feed");
+    const empty = document.getElementById("empty");
+    const connection = document.getElementById("connection");
+    const follow = document.getElementById("follow");
+    const stats = { requests: 0, records: 0, lastReceived: null };
+    document.getElementById("endpoint").textContent = `${location.origin}/`;
+
+    // Map (optional: the feed still works if the CDN or tiles are unreachable).
+    let map, track, latest;
+    if (window.L) {
+      map = L.map("map", { zoomControl: true }).setView([20, 0], 2);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+      const brand = getComputedStyle(document.documentElement).getPropertyValue("--brand").trim();
+      track = L.polyline([], { color: brand, weight: 3, opacity: 0.8 }).addTo(map);
+      latest = L.circleMarker([0, 0], { radius: 8, color: "#fff", weight: 3, fillColor: brand, fillOpacity: 1 });
+    } else {
+      document.getElementById("map").textContent = "Map unavailable (Leaflet could not be loaded).";
+    }
+
+    function plot(points) {
+      if (!map) return;
+      const coordinates = points
+        .filter((p) => typeof p.lat === "number" && typeof p.lon === "number")
+        .map((p) => [p.lat, p.lon]);
+      if (!coordinates.length) return;
+      const isFirst = track.getLatLngs().length === 0;
+      for (const coordinate of coordinates) track.addLatLng(coordinate);
+      const all = track.getLatLngs();
+      if (all.length > MAX_TRACK_POINTS) track.setLatLngs(all.slice(-MAX_TRACK_POINTS));
+      const last = coordinates[coordinates.length - 1];
+      latest.setLatLng(last).addTo(map);
+      if (isFirst) map.setView(last, 16);
+      else if (follow.checked) map.panTo(last);
+    }
+
+    // Formatting helpers.
+    const escapeHTML = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+    const timeOf = (iso) => (iso ? new Date(iso).toLocaleTimeString() : "–");
+    const number = (value, digits) => (typeof value === "number" ? value.toFixed(digits) : "–");
+    const percent = (value) => (typeof value === "number" ? `${Math.round(value * 100)}%` : "–");
+    const speed = (value) => (typeof value === "number" && value >= 0 ? `${(value * 3.6).toFixed(1)} km/h` : "–");
+    const plural = (count, word) => `${count} ${word}${count === 1 ? "" : "s"}`;
+
+    function relative(date) {
+      const seconds = Math.round((Date.now() - date) / 1000);
+      if (seconds < 5) return "just now";
+      if (seconds < 60) return `${seconds}s ago`;
+      if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+      return date.toLocaleTimeString();
+    }
+
+    function updateStats() {
+      document.getElementById("stat-requests").textContent = stats.requests;
+      document.getElementById("stat-records").textContent = stats.records;
+      document.getElementById("stat-last").textContent = stats.lastReceived ? relative(stats.lastReceived) : "never";
+    }
+    setInterval(updateStats, 1000);
+
+    function render(event) {
+      const ok = event.status >= 200 && event.status < 300;
+      const points = event.points || [];
+      const locations = points.filter((p) => p.kind === "location");
+      const devices = [...new Set(points.map((p) => p.device).filter(Boolean))];
+
+      const rows = points.map((p) => `
+        <tr class="${p.kind === "location" ? "" : "event"}">
+          <td>${escapeHTML(timeOf(p.time))}</td>
+          <td>${escapeHTML(p.kind)}</td>
+          <td class="mono">${number(p.lat, 6)}, ${number(p.lon, 6)}</td>
+          <td>${typeof p.accuracy === "number" ? `±${Math.round(p.accuracy)} m` : "–"}</td>
+          <td>${speed(p.speed)}</td>
+          <td>${percent(p.battery)}</td>
+          <td>${escapeHTML((p.motion || []).join(", ") || "–")}</td>
+        </tr>`).join("");
+
+      const item = document.createElement("details");
+      item.className = "item fresh";
+      item.innerHTML = `
+        <summary>
+          <span class="status ${ok ? "" : "fail"}">${escapeHTML(event.status)}</span>
+          <span class="title">POST ${escapeHTML(event.path)}
+            ${event.current ? '<span class="badge">current</span>' : ""}
+          </span>
+          <span class="time">${escapeHTML(timeOf(event.received))}</span>
+          <span class="meta">${plural(locations.length, "location")}${points.length > locations.length ? ` · ${plural(points.length - locations.length, "event")}` : ""}
+            · ${(event.bytes / 1024).toFixed(1)} kB · from ${escapeHTML(event.client)}${devices.length ? ` · ${escapeHTML(devices.join(", "))}` : ""}
+            ${ok ? "" : ` · ${escapeHTML(event.response?.error ?? "")}`}</span>
+        </summary>
+        <div class="body">
+          ${points.length ? `<div class="table-wrap"><table>
+            <thead><tr><th>Time</th><th>Kind</th><th>Coordinates</th><th>Accuracy</th><th>Speed</th><th>Battery</th><th>Motion</th></tr></thead>
+            <tbody>${rows}</tbody></table></div>` : ""}
+          <div class="label">Request body</div>
+          <pre>${escapeHTML(event.body || "(empty)")}</pre>
+          <div class="label">Response</div>
+          <pre>${escapeHTML(JSON.stringify(event.response, null, 2))}</pre>
+        </div>`;
+
+      empty.hidden = true;
+      feed.insertBefore(item, empty.nextSibling);
+      while (feed.querySelectorAll("details.item").length > MAX_ITEMS) feed.lastElementChild.remove();
+
+      stats.requests += 1;
+      stats.records += points.length;
+      stats.lastReceived = new Date(event.received);
+      updateStats();
+      if (ok) plot(locations);
+    }
+
+    // Live stream. EventSource reconnects on its own and resumes from the last event id.
+    const source = new EventSource("/events");
+    source.onopen = () => { connection.classList.add("live"); connection.title = "Live"; };
+    source.onerror = () => { connection.classList.remove("live"); connection.title = "Reconnecting…"; };
+    source.onmessage = (message) => render(JSON.parse(message.data));
+
+    document.getElementById("clear").addEventListener("click", () => {
+      feed.querySelectorAll("details.item").forEach((item) => item.remove());
+      empty.hidden = false;
+      Object.assign(stats, { requests: 0, records: 0, lastReceived: null });
+      updateStats();
+      if (map) { track.setLatLngs([]); latest.remove(); }
+    });
+  </script>
+</body>
+</html>

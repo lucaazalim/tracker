@@ -1,0 +1,336 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7A0000000000000000000101 /* TrackerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7A0000000000000000000401 /* TrackerKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7A0000000000000000000201 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A0000000000000000000202 /* TrackerKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TrackerKit; sourceTree = "<group>"; };
+		7A0000000000000000000203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A0000000000000000000204 /* Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tracker.entitlements; sourceTree = "<group>"; };
+		7A0000000000000000000205 /* Tracker.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tracker.xcconfig; sourceTree = "<group>"; };
+		7A0000000000000000000206 /* Signing.local.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = Signing.local.xcconfig.example; sourceTree = "<group>"; };
+		7A0000000000000000000208 /* Tracker-PersonalTeam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tracker-PersonalTeam.entitlements"; sourceTree = "<group>"; };
+		7A0000000000000000000207 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7A0000000000000000000301 /* Tracker */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Tracker;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7A0000000000000000000501 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A0000000000000000000101 /* TrackerKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7A0000000000000000000601 = {
+			isa = PBXGroup;
+			children = (
+				7A0000000000000000000207 /* README.md */,
+				7A0000000000000000000301 /* Tracker */,
+				7A0000000000000000000602 /* Config */,
+				7A0000000000000000000603 /* Packages */,
+				7A0000000000000000000604 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7A0000000000000000000602 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				7A0000000000000000000203 /* Info.plist */,
+				7A0000000000000000000204 /* Tracker.entitlements */,
+				7A0000000000000000000208 /* Tracker-PersonalTeam.entitlements */,
+				7A0000000000000000000205 /* Tracker.xcconfig */,
+				7A0000000000000000000206 /* Signing.local.xcconfig.example */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		7A0000000000000000000603 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				7A0000000000000000000202 /* TrackerKit */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		7A0000000000000000000604 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A0000000000000000000201 /* Tracker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7A0000000000000000000701 /* Tracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A0000000000000000000902 /* Build configuration list for PBXNativeTarget "Tracker" */;
+			buildPhases = (
+				7A0000000000000000000702 /* Sources */,
+				7A0000000000000000000501 /* Frameworks */,
+				7A0000000000000000000703 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				7A0000000000000000000301 /* Tracker */,
+			);
+			name = Tracker;
+			packageProductDependencies = (
+				7A0000000000000000000401 /* TrackerKit */,
+			);
+			productName = Tracker;
+			productReference = 7A0000000000000000000201 /* Tracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7A0000000000000000000801 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					7A0000000000000000000701 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = 7A0000000000000000000901 /* Build configuration list for PBXProject "Tracker" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7A0000000000000000000601;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7A0000000000000000000402 /* XCLocalSwiftPackageReference "Packages/TrackerKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 7A0000000000000000000604 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7A0000000000000000000701 /* Tracker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7A0000000000000000000703 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7A0000000000000000000702 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7A0000000000000000000A01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7A0000000000000000000A02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7A0000000000000000000A03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A0000000000000000000205 /* Tracker.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Config/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tracker;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Tracker records your location in the background and sends it to the server you configure. Choose “Always” so tracking continues when the app is closed.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tracker records your location and sends it to the server you configure.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Tracker can include your motion activity (walking, driving, …) in each location record.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7A0000000000000000000A04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A0000000000000000000205 /* Tracker.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Config/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tracker;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Tracker records your location in the background and sends it to the server you configure. Choose “Always” so tracking continues when the app is closed.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tracker records your location and sends it to the server you configure.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Tracker can include your motion activity (walking, driving, …) in each location record.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7A0000000000000000000901 /* Build configuration list for PBXProject "Tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A0000000000000000000A01 /* Debug */,
+				7A0000000000000000000A02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A0000000000000000000902 /* Build configuration list for PBXNativeTarget "Tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A0000000000000000000A03 /* Debug */,
+				7A0000000000000000000A04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		7A0000000000000000000402 /* XCLocalSwiftPackageReference "Packages/TrackerKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/TrackerKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7A0000000000000000000401 /* TrackerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TrackerKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 7A0000000000000000000801 /* Project object */;
+}

@@ -1,0 +1,17 @@
+// Build settings for the Tracker app target.
+//
+// To build on a device, copy Signing.local.xcconfig.example to Signing.local.xcconfig
+// (git-ignored) and set your team and bundle identifier prefix there.
+
+TRACKER_BUNDLE_ID_PREFIX = com.example
+PRODUCT_BUNDLE_IDENTIFIER = $(TRACKER_BUNDLE_ID_PREFIX).tracker
+DEVELOPMENT_TEAM =
+
+// Free (Personal Team) accounts can't use Access Wi-Fi Information; point this at
+// Tracker-PersonalTeam.entitlements in Signing.local.xcconfig.
+CODE_SIGN_ENTITLEMENTS = Config/Tracker.entitlements
+
+MARKETING_VERSION = 0.1.0
+CURRENT_PROJECT_VERSION = 1
+
+#include? "Signing.local.xcconfig"
