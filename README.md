@@ -7,10 +7,10 @@ Tracker records your location in the background, queues it on the device, and up
 It's a modern rewrite of [Overland](https://github.com/aaronpk/Overland-iOS) by Aaron Parecki, built with SwiftUI and Liquid Glass for iOS 26, and its GeoJSON output is wire-compatible with Overland receivers.
 
 <p align="center">
-  <img src="docs/screenshots/status.png" width="200" alt="Status screen">
-  <img src="docs/screenshots/profile.png" width="200" alt="Profile editor">
-  <img src="docs/screenshots/server.png" width="200" alt="Server settings">
-  <img src="docs/screenshots/inspector.png" width="200" alt="Request inspector">
+  <img src="docs/screenshots/status.png" width="23%" alt="Status screen">
+  <img src="docs/screenshots/profile.png" width="23%" alt="Profile editor">
+  <img src="docs/screenshots/server.png" width="23%" alt="Server settings">
+  <img src="docs/screenshots/inspector.png" width="23%" alt="Request inspector">
 </p>
 
 > [!IMPORTANT]
