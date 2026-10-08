@@ -108,6 +108,7 @@ private struct WifiZoneEditor: View {
                 }
             }
             .navigationTitle("Wi-Fi Zone")
+            .scrollDismissesKeyboard(.interactively)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

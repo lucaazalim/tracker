@@ -7,6 +7,7 @@ struct ServerView: View {
     @Environment(TrackerEngine.self) private var engine
     @State private var testResult: RequestLogEntry?
     @State private var isTesting = false
+    @FocusState private var isEditingEndpoint: Bool
 
     var body: some View {
         @Bindable var store = store
@@ -21,6 +22,15 @@ struct ServerView: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .font(.body.monospaced())
+                        .submitLabel(.done)
+                        .focused($isEditingEndpoint)
+                        .onChange(of: store.configuration.server.endpoint) { _, endpoint in
+                            // The field wraps long URLs, so Return inserts a newline instead of submitting.
+                            // A URL never contains one: treat it as "done".
+                            guard endpoint.contains(where: \.isNewline) else { return }
+                            store.configuration.server.endpoint = endpoint.filter { !$0.isNewline }
+                            isEditingEndpoint = false
+                        }
                 } header: {
                     Text("Endpoint")
                 } footer: {
@@ -143,6 +153,7 @@ struct ServerView: View {
                 }
             }
             .navigationTitle("Server")
+            .scrollDismissesKeyboard(.interactively)
         }
     }
 

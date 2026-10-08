@@ -58,6 +58,7 @@ private struct ProfileForm: View {
             }
         }
         .navigationTitle(profile.name.isEmpty ? "Profile" : profile.name)
+        .scrollDismissesKeyboard(.interactively)
         .navigationBarTitleDisplayMode(.inline)
     }
 
