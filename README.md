@@ -13,8 +13,11 @@ It's a modern rewrite of [Overland](https://github.com/aaronpk/Overland-iOS) by 
   <img src="docs/screenshots/inspector.png" width="200" alt="Request inspector">
 </p>
 
+> [!IMPORTANT]
+> Tracker isn't publicly available yet. It's not on the App Store or TestFlight, so for now the only way to use it is to [build it from source](#getting-started).
+
 > [!NOTE]
-> "Tracker" is a working title.
+> "Tracker" is a working title. Website: [lucaazalim.github.io/tracker](https://lucaazalim.github.io/tracker/)
 
 ## Contents
 
@@ -58,7 +61,7 @@ It's a modern rewrite of [Overland](https://github.com/aaronpk/Overland-iOS) by 
 ### Build and run
 
 ```bash
-git clone https://github.com/<you>/tracker.git
+git clone https://github.com/lucaazalim/tracker.git
 ```
 
 ```bash
