@@ -121,7 +121,7 @@
     .nav-links { display: flex; gap: 28px; margin-left: auto; font-size: 15px; color: var(--muted); }
     .nav-links a { transition: color .15s; }
     .nav-links a:hover { color: var(--ink); }
-    .nav .btn-sm { margin-left: 4px; }
+    .nav .soon-sm { margin-left: 4px; }
 
     .btn-sm {
       display: inline-flex; align-items: center; gap: 8px;
@@ -147,6 +147,18 @@
     .appstore span { display: flex; flex-direction: column; line-height: 1.1; }
     .appstore small { font-size: 11px; font-weight: 500; opacity: .8; letter-spacing: .01em; }
     .appstore strong { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+    .soon { position: relative; display: inline-flex; cursor: not-allowed; }
+    .soon > [aria-disabled] { opacity: .38; pointer-events: none; user-select: none; }
+    .ribbon {
+      position: absolute; right: 0; top: 0;
+      transform: translate(14%, -50%) rotate(4deg);
+      padding: 6px 10px; white-space: nowrap;
+      background: #f6c445; color: #1d1600;
+      font: 600 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .08), 0 6px 14px -6px rgba(60, 40, 0, .45);
+      pointer-events: none;
+    }
+    .soon-sm .ribbon { padding: 3px 6px; font-size: 8.5px; letter-spacing: .08em; transform: translate(18%, -45%) rotate(4deg); }
     .ghost {
       display: inline-flex; align-items: center; gap: 10px;
       height: 56px; padding: 0 22px; border-radius: 14px;
@@ -365,7 +377,7 @@
     }
     @media (max-width: 720px) {
       .nav-links { display: none; }
-      .nav .btn-sm { margin-left: auto; }
+      .nav .soon-sm { margin-left: auto; }
     }
     @media (max-width: 600px) {
       body { font-size: 16px; }
@@ -381,7 +393,9 @@
       .cell, .cell:nth-child(even) { padding: 26px 0 28px; border-left: 0; }
       .row .phone { width: 220px; }
       .recv-list li { grid-template-columns: 1fr; gap: 4px; }
-      .actions > a { width: 100%; justify-content: center; }
+      .actions > a, .actions > .soon, .actions .soon > .appstore { width: 100%; justify-content: center; }
+      .actions .ribbon { right: 14px; transform: translateY(-50%) rotate(3deg); }
+      .soon-sm .ribbon { transform: translate(4%, -45%) rotate(4deg); }
       .band { padding: 96px 0; }
       .cta { padding: 104px 0 88px; }
     }
@@ -394,7 +408,7 @@
   </style>
 </head>
 <body>
-  <!-- App Store link: replace href on every .js-store link once the listing is live. -->
+  <!-- Download buttons are disabled until the App Store listing exists. -->
   <header class="nav" id="nav">
     <div class="wrap">
       <a class="brand" href="#top"><img src="assets/icon-256.png" alt="">Tracker</a>
@@ -404,10 +418,10 @@
         <a href="#receivers">Receivers</a>
         <a href="https://github.com/lucaazalim/tracker">GitHub</a>
       </nav>
-      <a class="btn-sm js-store" href="https://github.com/lucaazalim/tracker">
+      <span class="soon soon-sm"><span class="btn-sm" aria-disabled="true">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg>
         Download
-      </a>
+      </span><span class="ribbon">Not yet available</span></span>
     </div>
   </header>
 
@@ -417,12 +431,12 @@
         <div>
           <span class="tag"><i></i>Free · iPhone and iPad · iOS 26</span>
           <h1>Background location logging to your own server.</h1>
-          <p class="lede">Tracker records your location in the background, queues it on the device, and uploads it in batches to an HTTP endpoint you choose. It's a rewrite of Overland, and its GeoJSON output works with existing Overland receivers.</p>
+          <p class="lede">Tracker records your location in the background, queues it on the device, and uploads it in batches to an HTTP endpoint you choose.</p>
           <div class="actions">
-            <a class="appstore js-store" href="https://github.com/lucaazalim/tracker">
+            <span class="soon"><span class="appstore" aria-disabled="true">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg>
               <span><small>Download on the</small><strong>App Store</strong></span>
-            </a>
+            </span><span class="ribbon">Not yet available</span></span>
             <a class="ghost" href="https://github.com/lucaazalim/tracker">
               <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
               View source
@@ -523,7 +537,7 @@ Content-Type: application/json</span>
   }
 }</pre>
             </div>
-            <p class="code-note">GeoJSON batches compatible with Overland receivers, or one OwnTracks <code>_type: location</code> object per request. Anything other than an acknowledgement keeps the batch queued for the next attempt.</p>
+            <p class="code-note">GeoJSON batches, or one OwnTracks <code>_type: location</code> object per request. Anything other than an acknowledgement keeps the batch queued for the next attempt.</p>
           </div>
         </div>
       </div>
@@ -554,7 +568,7 @@ Content-Type: application/json</span>
           <article class="row">
             <div class="copy">
               <h3>Server</h3>
-              <p>Records are sent as GeoJSON batches in the Overland format, or as OwnTracks objects. Authentication can be a bearer token, Basic auth or custom headers. The endpoint URL can include placeholders for receivers that take query parameters.</p>
+              <p>Records are sent as GeoJSON batches or as OwnTracks objects. Authentication can be a bearer token, Basic auth or custom headers. The endpoint URL can include placeholders for receivers that take query parameters.</p>
               <ul class="facts">
                 <li><span>Formats</span><span>GeoJSON, OwnTracks</span></li>
                 <li><span>Auth</span><span>Bearer, Basic, custom headers</span></li>
@@ -620,7 +634,7 @@ Content-Type: application/json</span>
       <div class="wrap recv">
         <div>
           <h2 class="h2">Compatible receivers</h2>
-          <p class="sub">Any receiver that accepts Overland's GeoJSON format, or OwnTracks over HTTP, should work. You can enter the endpoint by hand or open a setup link.</p>
+          <p class="sub">Any receiver that accepts Overland-style GeoJSON batches, or OwnTracks over HTTP, should work. You can enter the endpoint by hand or open a setup link.</p>
           <div class="code" style="margin-top: 36px;">
             <header><b>Setup link</b><span>opens a review screen</span></header>
 <pre><span class="h">tracker://setup</span><span class="c">?</span><span class="k">url</span>=<span class="s">https%3A%2F%2Fyour-server.example%2Fingest</span>
@@ -629,14 +643,13 @@ Content-Type: application/json</span>
         </div>
         <div>
           <ul class="recv-list">
-            <li><a href="https://dawarich.app/"><strong>Dawarich</strong></a><span>Self-hosted location history. Use its Overland endpoint, <code>/api/v1/overland/batches</code>.</span></li>
+            <li><a href="https://dawarich.app/"><strong>Dawarich</strong></a><span>Self-hosted location history. Endpoint: <code>/api/v1/overland/batches</code>.</span></li>
             <li><a href="https://github.com/tess1o/geopulse"><strong>GeoPulse</strong></a><span>Self-hosted timeline. Add Overland as a GPS source.</span></li>
             <li><a href="https://www.home-assistant.io/integrations/owntracks/"><strong>Home Assistant</strong></a><span>Through the OwnTracks integration, with Basic auth.</span></li>
             <li><a href="https://github.com/aaronpk/Compass"><strong>Compass</strong></a><span>GeoJSON storage and map by Aaron Parecki.</span></li>
             <li><a href="https://github.com/dontic/wayfinder"><strong>Wayfinder</strong></a><span>Self-hosted location tracking.</span></li>
             <li><strong>Your own</strong><span>Anything that accepts a JSON POST and replies <code>{"result":"ok"}</code>.</span></li>
           </ul>
-          <p class="callout"><strong>Coming from Overland:</strong> existing receivers work without changes, and <code>overland://setup</code> links are accepted.</p>
         </div>
       </div>
     </section>
@@ -659,10 +672,10 @@ Content-Type: application/json</span>
         <h2>Tracker</h2>
         <p>Free for iPhone and iPad. Requires iOS 26 or later.</p>
         <div class="actions">
-          <a class="appstore js-store" href="https://github.com/lucaazalim/tracker">
+          <span class="soon"><span class="appstore" aria-disabled="true">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg>
             <span><small>Download on the</small><strong>App Store</strong></span>
-          </a>
+          </span><span class="ribbon">Not yet available</span></span>
           <a class="ghost" href="https://github.com/lucaazalim/tracker#readme">Documentation</a>
         </div>
       </div>
