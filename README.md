@@ -4,7 +4,7 @@
 
 Tracker records your location in the background, queues it on the device, and uploads it in batches to an HTTP endpoint you control. It's built for people who want their location data in their own systems (a self-hosted timeline, a home-automation hub, a data warehouse) and who want control over exactly what's captured, when, and how it's sent.
 
-It's built with SwiftUI and Liquid Glass for iOS 26, and speaks two widely supported formats: GeoJSON batches and OwnTracks.
+It's a modern rewrite of [Overland](https://github.com/aaronpk/Overland-iOS) by Aaron Parecki, built with SwiftUI and Liquid Glass for iOS 26, and its GeoJSON output is wire-compatible with Overland receivers.
 
 <p align="center">
   <img src="docs/screenshots/status.png" width="200" alt="Status screen">
@@ -26,6 +26,7 @@ It's built with SwiftUI and Liquid Glass for iOS 26, and speaks two widely suppo
 - [Setup links and QR codes](#setup-links-and-qr-codes)
 - [Shortcuts](#shortcuts)
 - [Compatible receivers](#compatible-receivers)
+- [Coming from Overland](#coming-from-overland)
 - [Alternatives](#alternatives)
 - [Architecture](#architecture)
 - [Development](#development)
@@ -38,7 +39,7 @@ It's built with SwiftUI and Liquid Glass for iOS 26, and speaks two widely suppo
 - **Full Core Location control.** Standard and significant-change updates, visits, desired accuracy, activity type, the iOS distance filter, automatic pausing, a resume geofence (built on `CLMonitor`), and the background location indicator.
 - **Per-field payloads.** Turn each property on or off individually. Every toggle shows the JSON key it controls, and a live preview shows the exact record that will be sent.
 - **A reliable offline queue.** Records are stored in SQLite and deleted only after the server acknowledges them. Retention limits keep an unreachable server from filling the device.
-- **Flexible delivery.** GeoJSON batches or OwnTracks objects, with bearer, basic or custom-header authentication and URL placeholders like `%LAT`.
+- **Flexible delivery.** Overland-style GeoJSON batches or OwnTracks objects, with bearer, basic or custom-header authentication and URL placeholders like `%LAT`.
 - **Remote configuration.** Your server can adjust settings or switch profiles through its response.
 - **A request inspector.** The last 200 requests, with headers, bodies and responses, and credentials masked.
 - **Import and export.** Share a configuration as JSON, as a link, or as a QR code. Every import is reviewed before it's applied.
@@ -173,7 +174,7 @@ Coordinates and `timestamp` are always included. Everything else can be toggled:
 | Setting | Notes |
 |---|---|
 | Endpoint | `http` or `https` URL. Supports [placeholders](#url-placeholders). |
-| Format | GeoJSON or OwnTracks |
+| Format | GeoJSON (Overland) or OwnTracks |
 | Success when | `"result": "ok"` in the body, or any 2xx status |
 | Authentication | None · Bearer token · Basic |
 | Custom headers | Sent with every request. They override the authentication header. |
@@ -191,7 +192,7 @@ Coordinates and `timestamp` are always included. Everything else can be toggled:
 
 ## Receiver protocol
 
-### GeoJSON
+### GeoJSON (Overland-compatible)
 
 ```http
 POST /your/endpoint HTTP/1.1
@@ -300,7 +301,7 @@ In OwnTracks format, Tracker sends one [`_type: location`](https://owntracks.org
 
 | Link | Purpose |
 |---|---|
-| `tracker://setup?url=…&token=…&device_id=…&unique_id=yes` | Quick setup of the endpoint, token and device ID. |
+| `tracker://setup?url=…&token=…&device_id=…&unique_id=yes` | Quick setup, compatible with Overland's setup links. `overland://setup` links pasted into Tracker work too. |
 | `tracker://import?config=…` | A complete configuration, zlib-compressed and base64url-encoded. |
 
 *Settings → Import & Export* exports the configuration as a JSON file, a link, or a QR code that the Camera app can scan. Credentials are left out unless you include them explicitly. Every import, whether from a link, QR code, file or paste, opens a review screen first, so a malicious link can't silently redirect your location data.
@@ -321,13 +322,26 @@ For example: *When I arrive at Work → Switch Profile to Battery saver*.
 
 ## Compatible receivers
 
-Any receiver that accepts these GeoJSON batches or OwnTracks objects should work, including:
+Any receiver for Overland's GeoJSON format should work. Most of them call it "Overland", so choose their Overland endpoint or source:
 
-- [Dawarich](https://dawarich.app/), a self-hosted alternative to Google Location History
+- [Dawarich](https://dawarich.app/), a self-hosted alternative to Google Location History. Use its Overland endpoint, `/api/v1/overland/batches?api_key=…`.
+- [GeoPulse](https://github.com/tess1o/geopulse), a self-hosted timeline. Add Overland as a GPS source.
 - [Compass](https://github.com/aaronpk/Compass)
 - [Wayfinder](https://github.com/dontic/wayfinder)
 - [Home Assistant](https://www.home-assistant.io/integrations/owntracks/) (OwnTracks format)
 - Your own receiver. [`scripts/dev-receiver.py`](scripts/dev-receiver.py) is a short starting point, with a live dashboard.
+
+## Coming from Overland
+
+| Overland | Tracker |
+|---|---|
+| Main and trip settings | Any number of **profiles** |
+| Trips (modes, distance, steps) | Not included. Use profiles and Shortcuts instead. |
+| Logging mode *All / Only latest / OwnTracks* | Split into *Queue strategy* (profile) and *Format* (server) |
+| One Wi-Fi zone | Multiple zones, with a *Don't record* option |
+| `overland://setup` | `tracker://setup` (same parameters), with a confirmation screen |
+| Settings in the iOS Settings app | All in-app |
+| OwnTracks `tst` in Apple's 2001 epoch, broken Basic auth | Fixed: Unix epoch and a proper Basic header |
 
 ## Alternatives
 
@@ -386,4 +400,4 @@ Tracker sends data only to the endpoint you configure. It has no analytics, no c
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). Inspired by [Overland](https://github.com/aaronpk/Overland-iOS) by Aaron Parecki (Apache 2.0). Tracker is a new implementation and doesn't include Overland's code.

@@ -17,7 +17,7 @@ Thanks for your interest in improving Tracker! Bug reports, receiver compatibili
 
 - **Logic belongs in TrackerKit.** Anything that doesn't need UIKit or Core Location at runtime (payloads, configuration, queueing, uploading) goes in `Packages/TrackerKit` and comes with tests.
 - **Run the tests:** `swift test --package-path Packages/TrackerKit`.
-- **Keep the wire format compatible.** GeoJSON output must stay compatible with existing receivers. New properties must be opt-in through `PayloadFields`.
+- **Keep the wire format compatible.** GeoJSON output must stay compatible with Overland receivers. New properties must be opt-in through `PayloadFields`.
 - **Keep the configuration format compatible.** Add new configuration keys with defaults in the custom `init(from:)` so older exports still import.
 - **Match the existing style:** Swift 6 strict concurrency, `@Observable`, native SwiftUI controls, and Liquid Glass only for interactive controls.
 - **Don't add dependencies** unless there's no reasonable alternative.

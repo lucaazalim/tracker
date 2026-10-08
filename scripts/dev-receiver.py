@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal Tracker receiver for local development, with a live dashboard.
+"""Minimal Tracker/Overland receiver for local development, with a live dashboard.
 
 Accepts uploads, answers {"result": "ok"} so the app removes the batch from its queue,
 and streams everything it receives to a web page with a live feed and a map.
