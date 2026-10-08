@@ -58,7 +58,7 @@ struct TransferView: View {
             } header: {
                 Text("Import")
             } footer: {
-                Text("Paste a JSON configuration, a tracker://import link, or a quick-setup tracker://setup?url=…&token=…&device_id=… link.")
+                Text("Paste a JSON configuration, a tracker://import link, or an Overland-style tracker://setup?url=…&token=…&device_id=… link.")
             }
         }
         .navigationTitle("Import & Export")

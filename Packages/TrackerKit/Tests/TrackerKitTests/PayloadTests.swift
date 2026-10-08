@@ -24,7 +24,7 @@ struct PayloadTests {
         CaptureContext(profile: .balanced(), locationsInPayload: 1)
     }
 
-    @Test func geoJSONLocationShape() throws {
+    @Test func geoJSONMatchesOverlandShape() throws {
         let record = PayloadBuilder.location(sample, device: device, context: context, fields: PayloadFields(), format: .geojson)
         #expect(record["type"] == "Feature")
         #expect(record["geometry"]?["coordinates"] == [-122.030581, 37.3318001])
@@ -99,7 +99,7 @@ struct PayloadTests {
         #expect(object["_type"] == "location")
         #expect(object["lat"] == 37.3318001)
         #expect(object["lon"] == -122.030581)
-        // Unix epoch seconds.
+        // Unix epoch seconds (Overland mistakenly used the 2001 reference date).
         #expect(object["tst"] == 1_443_711_600)
         #expect(object["acc"] == 30)
         #expect(object["alt"] == 12)

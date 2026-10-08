@@ -56,7 +56,7 @@ struct ServerView: View {
                 } footer: {
                     Text(store.configuration.server.format == .owntracks
                         ? "OwnTracks receivers (Home Assistant, OwnTracks Recorder) get one object per request; any 2xx response counts as success. The device ID becomes the topic, owntracks/<device id>."
-                        : "Batches of GeoJSON Features under \"locations\". Records are only removed from the queue once the server acknowledges them.")
+                        : "Overland-compatible batches. Records are only removed from the queue once the server acknowledges them.")
                 }
 
                 Section("Authentication") {

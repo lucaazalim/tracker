@@ -94,7 +94,7 @@ struct AboutView: View {
 
             Section {
                 Text("Tracker is open source and sends data only to the server you configure. There is no analytics, no account and no third-party service.")
-                Text("The GeoJSON format works with self-hosted receivers such as Dawarich, Compass and Wayfinder, and the OwnTracks format with Home Assistant and OwnTracks Recorder.")
+                Text("Inspired by Overland by Aaron Parecki. The GeoJSON format is compatible with Overland receivers such as Dawarich, Compass and Wayfinder.")
             }
             .font(.callout)
         }

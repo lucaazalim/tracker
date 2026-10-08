@@ -14,8 +14,8 @@ public enum LifecycleEvent: String, Sendable, CaseIterable {
 
 /// Builds the JSON records that are queued and uploaded.
 ///
-/// GeoJSON records use the `{"locations": [Feature, …]}` batch format understood by
-/// self-hosted receivers such as Dawarich, Compass and Wayfinder.
+/// The GeoJSON output is wire-compatible with Overland, so existing receivers
+/// (Compass, Dawarich, Wayfinder, …) keep working.
 public enum PayloadBuilder {
     // MARK: Locations
 
@@ -150,7 +150,7 @@ public enum PayloadBuilder {
 
     // MARK: Helpers
 
-    /// ISO 8601 in UTC with second precision, e.g. `2026-10-08T12:34:56Z`.
+    /// ISO 8601 in UTC with second precision, e.g. `2026-10-08T12:34:56Z` (Overland format).
     public static func timestamp(_ date: Date) -> String {
         date.formatted(.iso8601)
     }

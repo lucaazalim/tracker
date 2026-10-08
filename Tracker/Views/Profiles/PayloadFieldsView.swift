@@ -76,7 +76,7 @@ struct PayloadFieldsView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Menu("Presets", systemImage: "wand.and.stars") {
-                    Button("Defaults") { fields = PayloadFields() }
+                    Button("Overland Defaults") { fields = PayloadFields() }
                     Button("Everything") { setAll(true) }
                     Button("Coordinates Only") { setAll(false) }
                 }

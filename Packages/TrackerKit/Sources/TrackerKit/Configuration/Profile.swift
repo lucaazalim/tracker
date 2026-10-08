@@ -159,7 +159,7 @@ public struct PayloadFields: Codable, Sendable, Hashable {
 // MARK: - Built-in profiles
 
 extension Profile {
-    /// Continuous updates at 100 m accuracy, uploaded every 5 minutes.
+    /// Overland's defaults: continuous updates at 100 m accuracy, uploaded every 5 minutes.
     public static func balanced() -> Profile {
         Profile(name: "Balanced", symbol: "gauge.with.dots.needle.50percent")
     }

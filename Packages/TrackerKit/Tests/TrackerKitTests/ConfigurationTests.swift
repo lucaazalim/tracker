@@ -68,7 +68,7 @@ struct ConfigurationTests {
 
     @Test(arguments: [
         ("https://example.com/api", true),
-        ("http://192.168.1.10:8080/ingest", true),
+        ("http://192.168.1.10:8080/overland", true),
         ("https://example.com/in?lat=%LAT&lon=%LON", true),
         ("ftp://example.com", false),
         ("not a url", false),
@@ -83,7 +83,7 @@ struct ConfigurationTests {
 
 @Suite("Remote configuration")
 struct RemoteConfigurationTests {
-    @Test func appliesMainKeysToActiveProfile() throws {
+    @Test func appliesOverlandMainKeysToActiveProfile() throws {
         let set: JSONValue = [
             "send_interval": "1m",
             "main": [
@@ -200,8 +200,8 @@ struct ConfigurationTransferTests {
         #expect(link.absoluteString.utf8.count < 2_000)
     }
 
-    @Test func parsesSetupLinks() throws {
-        let url = try #require(URL(string: "tracker://setup?url=https%3A%2F%2Fexample.com%2Fapi&token=1234&device_id=phone&unique_id=yes"))
+    @Test func parsesOverlandStyleSetupLinks() throws {
+        let url = try #require(URL(string: "overland://setup?url=https%3A%2F%2Fexample.com%2Fapi&token=1234&device_id=phone&unique_id=yes"))
         guard case .setup(let parameters) = try ConfigurationTransfer.parse(url: url) else {
             Issue.record("Expected setup parameters")
             return

@@ -84,7 +84,7 @@ public enum ActivityType: String, Codable, Sendable, CaseIterable, Identifiable 
         }
     }
 
-    /// Value emitted in the `activity` payload property.
+    /// Value emitted in the `activity` payload property (Overland compatible).
     public var payloadName: String {
         switch self {
         case .other: "other"
@@ -115,7 +115,7 @@ public enum QueueStrategy: String, Codable, Sendable, CaseIterable, Identifiable
 
 /// Wire format of uploaded records.
 public enum PayloadFormat: String, Codable, Sendable, CaseIterable, Identifiable {
-    /// Batches of GeoJSON Features: `{"locations": [Feature, …]}`.
+    /// Overland-compatible `{"locations": [GeoJSON Feature]}` batches.
     case geojson
     /// One OwnTracks `_type: location` object per request (Home Assistant, OwnTracks Recorder).
     case owntracks
@@ -124,7 +124,7 @@ public enum PayloadFormat: String, Codable, Sendable, CaseIterable, Identifiable
 
     public var title: String {
         switch self {
-        case .geojson: "GeoJSON"
+        case .geojson: "GeoJSON (Overland)"
         case .owntracks: "OwnTracks"
         }
     }
@@ -132,7 +132,7 @@ public enum PayloadFormat: String, Codable, Sendable, CaseIterable, Identifiable
 
 /// How the server acknowledges that a batch was stored.
 public enum AcknowledgementMode: String, Codable, Sendable, CaseIterable, Identifiable {
-    /// The response body must be JSON containing `"result": "ok"`.
+    /// The response body must be JSON containing `"result": "ok"` (Overland protocol).
     case resultOK
     /// Any 2xx status code counts as success.
     case anySuccessStatus

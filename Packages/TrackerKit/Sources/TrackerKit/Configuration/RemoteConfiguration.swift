@@ -2,8 +2,9 @@ import Foundation
 
 /// Applies settings pushed by the server in the `set` object of an upload response.
 ///
-/// `send_interval` and the keys in `main` apply to the active profile. `profile` switches the
-/// active profile by name or id. Unknown keys and values are ignored.
+/// Overland's keys are supported for compatibility (`send_interval` and the `main` object, which
+/// targets the active profile). Tracker adds `profile` to switch the active profile by name or id.
+/// Overland's `trip` and `trip_mode` keys are ignored because Tracker has no trips.
 ///
 /// ```json
 /// {
@@ -80,7 +81,7 @@ public enum RemoteConfiguration {
             record("pause_automatically", value)
         }
         if let value = main["logging_mode"], let mode = value.stringValue {
-            // Only controls queueing; the payload format is a server setting.
+            // Overland's logging mode mixed queueing and format; only the queueing part is profile-level here.
             switch mode {
             case "all": profile.upload.queueStrategy = .all
             case "latest", "owntracks": profile.upload.queueStrategy = .latest

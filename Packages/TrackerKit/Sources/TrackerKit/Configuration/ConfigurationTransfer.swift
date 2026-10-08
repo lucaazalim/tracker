@@ -16,7 +16,7 @@ public enum ConfigurationTransferError: Error, LocalizedError, Sendable {
 
 /// A link or pasted text that changes the configuration. Always confirmed by the user before applying.
 public enum ConfigurationImport: Sendable, Equatable {
-    /// Quick setup: `tracker://setup?url=…&token=…&device_id=…&unique_id=yes`
+    /// Overland-style quick setup: `tracker://setup?url=…&token=…&device_id=…&unique_id=yes`
     case setup(SetupParameters)
     /// A complete configuration: `tracker://import?config=…` or a JSON document.
     case configuration(TrackerConfiguration)
@@ -85,9 +85,9 @@ public enum ConfigurationTransfer {
         return url
     }
 
-    /// Parses a `tracker://` deep link.
+    /// Parses a deep link. Accepts the `tracker` scheme as well as Overland's `overland` scheme for setup links.
     public static func parse(url: URL) throws -> ConfigurationImport {
-        guard let scheme = url.scheme?.lowercased(), scheme == Self.scheme else {
+        guard let scheme = url.scheme?.lowercased(), scheme == Self.scheme || scheme == "overland" else {
             throw ConfigurationTransferError.unsupportedLink
         }
         let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
