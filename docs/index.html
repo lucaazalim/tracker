@@ -245,7 +245,7 @@
     /* Pipeline */
     .pipeline { background: var(--bg-alt); border-block: 1px solid var(--line); }
     .steps { display: grid; grid-template-columns: repeat(5, 1fr); list-style: none; margin: 0 0 56px; padding: 0; counter-reset: s; }
-    .steps li { position: relative; padding: 0 22px 0 0; counter-increment: s; }
+    .steps li { position: relative; counter-increment: s; }
     .steps li::before {
       content: "0" counter(s);
       display: block; font: 500 12px/1 var(--mono); color: var(--muted);
@@ -257,8 +257,8 @@
       width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
       transform: translateY(-50%);
     }
-    .steps h3 { font-size: 18px; letter-spacing: -0.02em; margin-bottom: 8px; }
-    .steps p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+    .steps h3 { font-size: 18px; letter-spacing: -0.02em; margin-bottom: 8px; padding-right: 22px; }
+    .steps p { font-size: 15px; color: var(--muted); line-height: 1.55; padding-right: 22px; }
 
     .code-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; }
     .code-stack { display: grid; gap: 20px; align-content: start; }
@@ -364,7 +364,15 @@
       .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; }
       .hero { padding-top: 48px; }
       .stage { max-width: 520px; width: 100%; margin: 0 auto; }
-      .steps { grid-template-columns: 1fr 1fr; row-gap: 36px; }
+      .steps { grid-template-columns: 1fr; row-gap: 0; }
+      .steps li { max-width: 36em;
+        padding: 0 0 32px 28px;
+        background: linear-gradient(var(--line-strong), var(--line-strong)) 3px 0 / 1px 100% no-repeat;
+      }
+      .steps li:first-child { background-position: 3px 6px; }
+      .steps li:last-child { padding-bottom: 0; background-size: 1px 6px; }
+      .steps li::before { border-bottom: 0; padding-bottom: 0; margin-bottom: 10px; }
+      .steps li::after { top: 6px; }
       .code-grid, .row, .recv { grid-template-columns: minmax(0, 1fr); }
       .row { gap: 40px; }
       .row:nth-child(even) .shot { order: 0; }
@@ -388,7 +396,6 @@
       .stage .phone { width: 230px; transform: rotate(-2deg) translateX(10%); }
       .log { left: 0; bottom: 0; width: 86%; }
       .log .p b { display: none; }
-      .steps { grid-template-columns: 1fr; }
       .cells { grid-template-columns: 1fr; }
       .cell, .cell:nth-child(even) { padding: 26px 0 28px; border-left: 0; }
       .row .phone { width: 220px; }
